@@ -25,9 +25,11 @@ import '@fontsource/roboto/300.css';
 import TokenizeScreenshot from './images/rtg-tokenize.png'
 import TableDemo from "./TableDemo";
 
+// <img src={TokenizeScreenshot} alt="RTG screenshot"/> 
+
+
 const PageContents = () => (
   <div style={{padding: "10px"}}>
-    <img src={TokenizeScreenshot} alt="RTG screenshot"/>
   </div>
 );
 

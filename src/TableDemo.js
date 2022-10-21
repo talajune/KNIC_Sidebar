@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import CreateIcon from "@material-ui/icons/Create";
 import {
@@ -16,6 +15,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import './TableDemo.css';
   
 // Creating styles
 const useStyles = makeStyles({
@@ -25,7 +25,8 @@ const useStyles = makeStyles({
         },
     },
     table: {
-        minWidth: 650,
+        minWidth: "0px",
+        maxWidth: "50px"
     },
     snackbar: {
         bottom: "104px",
@@ -39,9 +40,9 @@ function TableDemo() {
     // Defining a state named rows
     // which we can update by calling on setRows function
     const [rows, setRows] = useState([
-        { id: 1, generaltask: "Transformer", node: "Python"},
-        { id: 2, generaltask: "Data Preperation", node: "Download Datasets"},
-        { id: 3, generaltask: "Error", node: "Missing Data"},
+        { id: 1, generaltask: "Data Preparation", nodename: "Download Datasets"},
+        { id: 2, generaltask: "Error", nodename: "Missing Data"},
+        { id: 3, generaltask: "Transformer", nodename: "Python"},
     ]);
   
     // Initial states
@@ -64,7 +65,7 @@ function TableDemo() {
             ...rows,
             {
                 id: rows.length + 1, generaltask: "",
-                node: "", nodedrop: ""
+                nodename: ""
             },
         ]);
         setEdit(true);
@@ -134,19 +135,19 @@ function TableDemo() {
           <div>
             {isEdit ? (
               <div>
-                <Button onClick={handleAdd}>
+                <Button justifyContent="right" onClick={handleAdd}>
                   <AddBoxIcon onClick={handleAdd} />
                   ADD
                 </Button>
                 {rows.length !== 0 && (
                   <div>
                     {disable ? (
-                      <Button disabled align="left" onClick={handleSave}>
+                      <Button disabled justifyContent="right" onClick={handleSave}>
                         <DoneIcon />
                         SAVE
                       </Button>
                     ) : (
-                      <Button align="left" onClick={handleSave}>
+                      <Button justifyContent="right" onClick={handleSave}>
                         <DoneIcon />
                         SAVE
                       </Button>
@@ -156,11 +157,11 @@ function TableDemo() {
               </div>
             ) : (
               <div>
-                <Button align="right" onClick={handleAdd}>
+                <Button justifyContent="right" onClick={handleAdd}>
                   <AddBoxIcon onClick={handleAdd} />
                   ADD
                 </Button>
-                <Button align="right" onClick={handleEdit}>
+                <Button justifyContent="right" onClick={handleEdit}>
                   <CreateIcon />
                   EDIT
                 </Button>
@@ -168,80 +169,70 @@ function TableDemo() {
             )}
           </div>
         </div>
-        <TableRow align="center"> </TableRow>
-  
+        <TableRow align="left"> </TableRow>
         <Table
           className={classes.table}
-          size="small"
-          aria-label="a dense table"
-        >
+          width="100px"
+          aria-label="a dense table">
+          <div class="table_size">
           <TableHead>
-          <TableRow>
-            <TableCell style={{width: 100}}>General Task </TableCell>
-            <TableCell align="left" style={{width: 100}}>Node Name </TableCell>
-            <TableCell align="left" style={{width: 200}}>Node Dropdown </TableCell>
-          </TableRow>
+            <TableRow>
+              <TableCell><b>General Task</b></TableCell>
+              <div class="header_labels">
+              <TableCell><b>Node Name</b></TableCell>
+              </div>
+            </TableRow>
           </TableHead>
+          </div>
           <TableBody>
             {rows.map((row, i) => {
               return (
-                <div>
-                  <TableRow>
+                <div class="table_size">
+                  <TableRow align="right">
                     {isEdit ? (
                       <div>
-                        <TableCell>
+                        
+                        <TableCell padding="none" align="center" >
                           <input
+                          style={{ width: "12.5em" }}
                             value={row.generaltask}
-                            name="General Task"
+                            name="generaltask"
                             onChange={(e) => handleInputChange(e, i)}
                           />
                         </TableCell>
-                        <TableCell>
-                          <input
-                            value={row.node}
-                            name="node"
-                            onChange={(e) => handleInputChange(e, i)}
-                          />
-                        </TableCell>
-                        <TableCell>
+
+                        <TableCell padding="none" align="right">
                           <select
-                            style={{ width: "100px" }}
-                            name="Node Drop"
-                            value={row.nodedrop}
+                            style={{ width: "12.5em" }}
+                            name="nodename"
+                            value={row.nodename}
                             onChange={(e) => handleInputChange(e, i)}
                           >
-                            <option value="Select Node"></option>
-                            <option value="Option1">Option1</option>
-                            <option value="Option2">Option2</option>
-                            <option value="Option3">Option3</option>
+                            <option value=""></option>
+                            <option value="Setup RTG and other libs">Setup RTG and other libs</option>
+                            <option value="Download datasets">Download datasets</option>
+                            <option value="Tokenize datasets">Tokenize datasets</option>
+                            <option value="Install rtg">Install rtg</option>
+                            <option value="Validate torch">Validate torch</option>
                           </select>
                         </TableCell>
-                      </div>
+                        </div>
                     ) : (
                       <div>
                         <TableCell component="th" scope="row">
                           {row.generaltask}
                         </TableCell>
                         <TableCell component="th" scope="row">
-                          {row.node}
+                           {row.nodename}
                         </TableCell>
-                        <TableCell component="th" scope="row" align="center">
-                          {row.nodedrop}
-                        </TableCell>
-                        <TableCell
-                          component="th"
-                          scope="row"
-                          align="center"
-                        ></TableCell>
                       </div>
                     )}
                     {isEdit ? (
-                      <Button className="mr10" onClick={handleConfirm}>
+                      <Button className="mr10"  justifyContent="left" onClick={handleConfirm}>
                         <ClearIcon />
                       </Button>
                     ) : (
-                      <Button className="mr10" onClick={handleConfirm}>
-                        <DeleteOutlineIcon />
+                      <Button className="mr10" justifyContent="right" onClick={handleConfirm}>
                       </Button>
                     )}
                     {showConfirm && (
@@ -252,7 +243,7 @@ function TableDemo() {
                           aria-labelledby="alert-dialog-title"
                           aria-describedby="alert-dialog-description"
                         >
-                          <DialogTitle id="alert-dialog-title">
+                          <DialogTitle id="alert-dialog-title" class="confirm_delete"  >
                             {"Confirm Delete"}
                           </DialogTitle>
                           <DialogContent>

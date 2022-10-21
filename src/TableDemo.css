@@ -1,0 +1,15 @@
+.table_size {
+    height: 75px;
+    width: 45px;
+  }
+
+  .header_labels{
+    padding-left: 100px;
+    padding-right: 70px;
+
+}
+.confirm_delete{
+float: left;
+text-align: center;
+position: left;
+}
