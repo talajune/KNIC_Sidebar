@@ -1,0 +1,25 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+  }
+  
+  .App table {
+    border: 1px solid;
+    float: left;
+    width: 400px;
+  }
+  .App .sidebar {
+    display: block;
+    width: 100px;
+    float: right;
+    margin-right: 20px;
+    border-left: 1px solid;
+  }
+  
+  .App table tr.selected {
+    background-color: light grey;
+  }
+  
+  .App table td {
+    border: 1px solid;
+  }

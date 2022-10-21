@@ -23,13 +23,12 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import '@fontsource/roboto/300.css';
 import TokenizeScreenshot from './images/rtg-tokenize.png'
-import TableDemo from "./TableDemo";
-
-// <img src={TokenizeScreenshot} alt="RTG screenshot"/> 
+import TableDemo from "./TableDemo.js"
 
 
 const PageContents = () => (
   <div style={{padding: "10px"}}>
+    <img src={TokenizeScreenshot} alt="RTG screenshot"/> 
   </div>
 );
 
@@ -262,6 +261,7 @@ const CurrentStateItem = (props) => (
     <Button variant="outlined" color={props.color} key={props.key} style={{color: props.color}} >{props.text}</Button>
 );
 
+
 const CurrentState = () => (
   <Accordion>
   <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -352,9 +352,10 @@ function MainDisplayPane({displayQuestion}) {
 export default function App() {
 
   return (
-    <Stack direction="row" spacing={2}>
-      <TabMaster />
-      <PageContents />
-    </Stack>
+<Stack direction="row" spacing={2}>
+<TabMaster />
+<PageContents />
+</Stack>
   );
 };
+
